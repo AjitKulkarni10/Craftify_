@@ -3,3 +3,4 @@ pydantic
 groq
 dotenv
 youtube_transcript_api
+uvicorn
