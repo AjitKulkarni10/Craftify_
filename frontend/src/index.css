@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Mindmap Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { 
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes flipIn {
+  from {
+    opacity: 0;
+    transform: perspective(400px) rotateX(-60deg);
+  }
+  to {
+    opacity: 1;
+    transform: perspective(400px) rotateX(0);
+  }
+}
+
+/* Animation Classes */
+.animate-fadeIn {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+.animate-flipIn {
+  animation: flipIn 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+/* Modal Layout */
+.mindmap-modal {
+  @apply fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50;
+}
+
+.modal-content {
+  @apply bg-white rounded-xl shadow-2xl transform transition-all;
+  width: 95vw;
+  height: 90vh;
+  max-width: 1600px;
+}
+
+.modal-header {
+  @apply p-6 border-b border-gray-200 flex justify-between items-center bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-t-xl sticky top-0 z-20;
+}
+
+/* Main Mindmap Container */
+.mindmap-container {
+  @apply relative w-full h-full overflow-auto;
+  padding: 3rem 2rem;
+}
+
+.diagram-container {
+  @apply relative mx-auto;
+  width: max-content;
+  min-width: 800px;
+  padding: 0 2rem;
+}
+
+/* Root Node */
+.root-node {
+  @apply flex flex-col items-center;
+}
+
+.root-card {
+  @apply bg-white rounded-xl shadow-lg p-6 mb-16 relative z-10 border-2 border-primary-500/20;
+  width: 320px;
+}
+
+/* Modules Container */
+.modules-container {
+  @apply grid gap-x-16 gap-y-20;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  width: 100%;
+  position: relative;
+}
+
+/* Module Node */
+.module-node {
+  @apply flex flex-col items-center relative;
+}
+
+.module-card {
+  @apply bg-white rounded-lg shadow-lg p-4 relative z-10 border-2 border-blue-500/20 w-full;
+  width: 280px;
+}
+
+/* Topics Container */
+.topics-container {
+  @apply mt-8 flex flex-wrap justify-center gap-3;
+  width: 100%;
+  max-width: 280px;
+}
+
+/* Topic Tag */
+.topic-tag {
+  @apply inline-block;
+}
+
+.topic-card {
+  @apply bg-white rounded-full px-4 py-2 shadow-sm border border-green-500/20 
+         hover:shadow-md transition-all duration-200 transform hover:-translate-y-0.5;
+}
+
+/* Connection Lines */
+.connection-line {
+  @apply absolute left-1/2 -translate-x-1/2;
+  width: 2px;
+  background: linear-gradient(to bottom, currentColor 90%, transparent);
+}
+
+.root-connection {
+  @apply text-primary-400;
+  height: 60px;
+  top: 100%;
+}
+
+.module-connection {
+  @apply text-blue-400;
+  height: 40px;
+  top: 100%;
+}
+
+/* Hover Effects */
+.root-card:hover {
+  @apply shadow-xl border-primary-500/40 -translate-y-0.5 transition-all duration-200;
+}
+
+.module-card:hover {
+  @apply shadow-xl border-blue-500/40 -translate-y-0.5 transition-all duration-200;
+}
+
+.topic-card:hover {
+  @apply border-green-500/40;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  .diagram-container {
+    min-width: 600px;
+  }
+  
+  .modules-container {
+    gap-x: 12px;
+    gap-y: 16px;
+  }
+  
+  .module-card {
+    width: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  .mindmap-container {
+    padding: 2rem 1rem;
+  }
+  
+  .diagram-container {
+    min-width: 400px;
+  }
+  
+  .root-card {
+    width: 280px;
+  }
+  
+  .module-card {
+    width: 220px;
+  }
+}
+
+.aspect-w-16 {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+}
+
+.aspect-w-16 iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
